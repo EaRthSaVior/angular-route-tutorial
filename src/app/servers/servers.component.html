@@ -10,6 +10,8 @@
     <a routerLink="servers">Relative path wihtout /- Reload throw error</a>
     <br />
     <a routerLink="/servers">Absolute path with /- Reload</a>
+    <br />
+    <button class="btn btn-primary" (click)="onReload()">Reload</button>
     <app-edit-server></app-edit-server>
     <hr />
     <app-server></app-server>
