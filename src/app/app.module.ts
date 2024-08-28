@@ -17,14 +17,22 @@ const routes = [
   {
     path: 'users',
     component: UsersComponent,
+    children: [
+      {
+        path: ':id/:name',
+        component: UserComponent,
+      },
+    ],
   },
+  ,
   {
-    path: 'users/:id/:name',
-    component: UserComponent,
+    path: 'servers',
+    component: ServersComponent,
+    children: [
+      { path: ':id', component: ServerComponent },
+      { path: ':id/edit', component: EditServerComponent },
+    ],
   },
-  { path: 'servers', component: ServersComponent },
-  { path: 'servers/:id/edit', component: EditServerComponent },
-  { path: 'servers/:id', component: ServerComponent },
 ];
 @NgModule({
   declarations: [
