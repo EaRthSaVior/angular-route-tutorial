@@ -11,6 +11,7 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes = [
   { path: '', component: HomeComponent },
@@ -33,6 +34,14 @@ const routes = [
       { path: ':id/edit', component: EditServerComponent },
     ],
   },
+  {
+    path: 'not-found',
+    component: PageNotFoundComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
+  },
 ];
 @NgModule({
   declarations: [
@@ -43,6 +52,7 @@ const routes = [
     UserComponent,
     EditServerComponent,
     ServerComponent,
+    PageNotFoundComponent,
   ],
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
   providers: [ServersService],
