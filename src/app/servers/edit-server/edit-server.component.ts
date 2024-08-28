@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
 import { ActivatedRoute } from '@angular/router';
+import { CanComponentDeactivate } from './can-deactivate-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-server',
   templateUrl: './edit-server.component.html',
   styleUrls: ['./edit-server.component.css'],
 })
-export class EditServerComponent implements OnInit {
+export class EditServerComponent implements OnInit, CanComponentDeactivate {
   server: { id: number; name: string; status: string };
   serverName = '';
   serverStatus = '';
@@ -17,6 +19,19 @@ export class EditServerComponent implements OnInit {
     private serversService: ServersService,
     private route: ActivatedRoute
   ) {}
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (
+      (this.serverName !== this.server.name ||
+        this.serverStatus !== this.server.status) &&
+      this.allowEdit === true
+    ) {
+      return confirm(
+        'You have unsaved changes. Are you sure you want to leave?'
+      );
+    } else {
+      return true;
+    }
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
