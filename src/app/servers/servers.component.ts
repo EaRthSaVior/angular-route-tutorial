@@ -18,9 +18,14 @@ export class ServersComponent implements OnInit {
 
   ngOnInit() {
     this.servers = this.serversService.getServers();
+    console.log('reload page');
   }
 
   onReload() {
-    this.router.navigate(['/servers']);
+    // window.location.reload(); reload the page
+    // reload component
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['servers']));
   }
 }

@@ -52,7 +52,7 @@ const routes = [
   },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: true })], // set onSameUrlNavigation:reload to reload component on same url
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
